@@ -26,48 +26,54 @@ var deleteWorkout = function deleteWorkout(e) {
 var WorkoutForm = function WorkoutForm(props) {
   return (/*#__PURE__*/React.createElement("form", {
       id: "workoutForm",
+      "class": "container tile is-parent is-vertical box has-background-primary",
       name: "workoutForm",
       onSubmit: handleWorkout,
       action: "/maker",
-      method: "POST",
-      className: "mainForm"
-    }, /*#__PURE__*/React.createElement("label", {
+      method: "POST"
+    }, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "type"
     }, "Type: "), /*#__PURE__*/React.createElement("input", {
       id: "workoutType",
+      "class": "input is-medium",
       type: "text",
       name: "type",
       placeholder: "Workout Type"
-    }), /*#__PURE__*/React.createElement("label", {
+    })), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "descr"
     }, "Description: "), /*#__PURE__*/React.createElement("input", {
       id: "workoutDescr",
+      "class": "input is-medium",
       type: "text",
       name: "descr",
       placeholder: "Workout Description"
-    }), /*#__PURE__*/React.createElement("label", {
+    })), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "workoutDate"
     }, "Date of Workout: "), /*#__PURE__*/React.createElement("input", {
       id: "workoutDate",
+      "class": "input is-medium",
       type: "date",
       name: "workoutDate"
-    }), /*#__PURE__*/React.createElement("label", {
+    })), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "duration"
     }, "Duration: "), /*#__PURE__*/React.createElement("input", {
       id: "workoutDuration",
+      "class": "input is-medium",
       type: "text",
       name: "duration",
       placeholder: "Workout Duration"
-    }), /*#__PURE__*/React.createElement("input", {
+    })), /*#__PURE__*/React.createElement("input", {
       id: "_csrf",
       type: "hidden",
       name: "_csrf",
       value: props.csrf
-    }), /*#__PURE__*/React.createElement("input", {
-      className: "makeWorkoutSubmit",
+    }), /*#__PURE__*/React.createElement("p", {
+      "class": "centerMe"
+    }, /*#__PURE__*/React.createElement("input", {
+      "class": "button tag has-background-link is-medium makeWorkoutSubmit",
       type: "submit",
       value: "Submit"
-    }))
+    })))
   );
 };
 
@@ -77,7 +83,7 @@ var WorkoutList = function WorkoutList(props) {
 
   if (props.workouts.length === 0) {
     return (/*#__PURE__*/React.createElement("div", {
-        className: "workoutList"
+        "class": "workoutList container tile is-parent is-vertical box has-background-primary"
       }, /*#__PURE__*/React.createElement("h3", {
         className: "emptyWorkout"
       }, "No Workouts Uploaded"))
@@ -87,11 +93,8 @@ var WorkoutList = function WorkoutList(props) {
   var workoutNodes = props.workouts.map(function (workout) {
     return (/*#__PURE__*/React.createElement("div", {
         key: workout._id,
-        className: "workout"
-      }, /*#__PURE__*/React.createElement("img", {
-        src: "/assets/img/logo-icon.png",
-        className: "logoIcon"
-      }), /*#__PURE__*/React.createElement("h4", {
+        "class": "workout container tile is-parent is-vertical box has-background-primary"
+      }, /*#__PURE__*/React.createElement("p", {
         className: "workoutType"
       }, " Type: ", workout.type, " "), /*#__PURE__*/React.createElement("p", {
         className: "workoutDescr"
@@ -104,7 +107,7 @@ var WorkoutList = function WorkoutList(props) {
         onSubmit: deleteWorkout,
         action: "/maker",
         method: "DELETE",
-        className: "deleteForm"
+        "class": "deleteForm"
       }, /*#__PURE__*/React.createElement("input", {
         type: "hidden",
         name: "_csrf",
@@ -113,11 +116,13 @@ var WorkoutList = function WorkoutList(props) {
         type: "hidden",
         name: "_id",
         value: workout._id
-      }), /*#__PURE__*/React.createElement("input", {
-        className: "deleteWorkoutSubmit",
+      }), /*#__PURE__*/React.createElement("p", {
+        "class": "centerMe"
+      }, /*#__PURE__*/React.createElement("input", {
+        "class": "deleteWorkoutSubmit button tag has-background-danger is-medium",
         type: "submit",
         value: "Delete"
-      })))
+      }))))
     );
   });
   return (/*#__PURE__*/React.createElement("div", {

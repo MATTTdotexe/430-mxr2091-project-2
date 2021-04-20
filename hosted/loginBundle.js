@@ -37,30 +37,34 @@ var LoginWindow = function LoginWindow(props) {
       onSubmit: handleLogin,
       action: "/login",
       method: "POST",
-      className: "mainForm"
-    }, /*#__PURE__*/React.createElement("label", {
+      "class": "container tile is-child is-vertical box has-background-primary"
+    }, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "username"
     }, "Username: "), /*#__PURE__*/React.createElement("input", {
       id: "user",
+      "class": "input is-medium",
       type: "text",
       name: "username",
       placeholder: "username"
-    }), /*#__PURE__*/React.createElement("label", {
+    })), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "pass"
     }, "Password: "), /*#__PURE__*/React.createElement("input", {
       id: "pass",
+      "class": "input is-medium",
       type: "password",
       name: "pass",
       placeholder: "password"
-    }), /*#__PURE__*/React.createElement("input", {
+    })), /*#__PURE__*/React.createElement("input", {
       type: "hidden",
       name: "_csrf",
       value: props.csrf
-    }), /*#__PURE__*/React.createElement("input", {
-      className: "formSubmit",
+    }), /*#__PURE__*/React.createElement("p", {
+      "class": "centerMe"
+    }, /*#__PURE__*/React.createElement("input", {
+      "class": "button tag has-background-link is-medium formSubmit",
       type: "submit",
       value: "Sign in"
-    }))
+    })))
   );
 };
 
@@ -71,37 +75,42 @@ var SignupWindow = function SignupWindow(props) {
       onSubmit: handleSignup,
       action: "/signup",
       method: "POST",
-      className: "mainForm"
-    }, /*#__PURE__*/React.createElement("label", {
+      "class": "container tile is-child is-vertical box has-background-primary"
+    }, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "username"
     }, "Username: "), /*#__PURE__*/React.createElement("input", {
       id: "user",
+      "class": "input is-medium",
       type: "text",
       name: "username",
       placeholder: "username"
-    }), /*#__PURE__*/React.createElement("label", {
+    })), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "pass"
     }, "Password: "), /*#__PURE__*/React.createElement("input", {
       id: "pass",
+      "class": "input is-medium",
       type: "password",
       name: "pass",
       placeholder: "password"
-    }), /*#__PURE__*/React.createElement("label", {
+    })), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "pass2"
     }, "Password: "), /*#__PURE__*/React.createElement("input", {
       id: "pass2",
+      "class": "input is-medium",
       type: "password",
       name: "pass2",
       placeholder: "retype password"
-    }), /*#__PURE__*/React.createElement("input", {
+    })), /*#__PURE__*/React.createElement("input", {
       type: "hidden",
       name: "_csrf",
       value: props.csrf
-    }), /*#__PURE__*/React.createElement("input", {
-      className: "formSubmit",
+    }), /*#__PURE__*/React.createElement("p", {
+      "class": "centerMe"
+    }, /*#__PURE__*/React.createElement("input", {
+      "class": "button tag has-background-link is-medium formSubmit",
       type: "submit",
       value: "Sign up"
-    }))
+    })))
   );
 };
 
