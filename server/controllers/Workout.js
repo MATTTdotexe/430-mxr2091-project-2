@@ -2,7 +2,7 @@ const models = require('../models');
 
 const { Workout } = models;
 
-const makerPage = (req, res) => {
+const workoutPage = (req, res) => {
   Workout.WorkoutModel.findByOwner(req.session.account._id, (err, docs) => {
     if (err) {
       console.log(err);
@@ -31,7 +31,7 @@ const makeWorkout = (req, res) => {
   const workoutPromise = newWorkout.save();
 
   workoutPromise.then(() => res.json({
-    redirect: '/maker',
+    redirect: '/workout',
   }));
 
   workoutPromise.catch((err) => {
@@ -76,7 +76,7 @@ const getWorkouts = (request, response) => {
   });
 };
 
-module.exports.makerPage = makerPage;
-module.exports.make = makeWorkout;
+module.exports.workoutPage = workoutPage;
+module.exports.workout = makeWorkout;
 module.exports.delete = deleteWorkout;
 module.exports.getWorkouts = getWorkouts;

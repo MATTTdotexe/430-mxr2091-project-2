@@ -4,7 +4,7 @@ var handleWorkout = function handleWorkout(e) {
   e.preventDefault();
 
   if ($('#workoutType').val() == '' || $('#workoutDescr').val() == '' || $('#workoutDate').val() == '' || $('#workoutDuration').val() == '') {
-    handleError('All fields are required.');
+    handleMessage('All fields are required.');
     return false;
   }
 
@@ -12,6 +12,7 @@ var handleWorkout = function handleWorkout(e) {
     loadWorkoutsFromServer();
     $('#workoutForm').get(0).reset();
   });
+  handleMessage('');
   return false;
 };
 
@@ -20,22 +21,23 @@ var deleteWorkout = function deleteWorkout(e) {
   sendAjax('DELETE', $(e.target).attr('action'), $(e.target).serialize(), function () {
     loadWorkoutsFromServer();
   });
+  handleMessage('');
   return false;
 };
 
 var WorkoutForm = function WorkoutForm(props) {
   return (/*#__PURE__*/React.createElement("form", {
       id: "workoutForm",
-      "class": "container tile is-parent is-vertical box has-background-primary",
+      className: "container tile is-parent is-vertical box has-background-primary",
       name: "workoutForm",
       onSubmit: handleWorkout,
-      action: "/maker",
+      action: "/workout",
       method: "POST"
     }, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "type"
     }, "Type: "), /*#__PURE__*/React.createElement("input", {
       id: "workoutType",
-      "class": "input is-medium",
+      className: "input is-medium",
       type: "text",
       name: "type",
       placeholder: "Workout Type"
@@ -43,7 +45,7 @@ var WorkoutForm = function WorkoutForm(props) {
       htmlFor: "descr"
     }, "Description: "), /*#__PURE__*/React.createElement("input", {
       id: "workoutDescr",
-      "class": "input is-medium",
+      className: "input is-medium",
       type: "text",
       name: "descr",
       placeholder: "Workout Description"
@@ -51,14 +53,14 @@ var WorkoutForm = function WorkoutForm(props) {
       htmlFor: "workoutDate"
     }, "Date of Workout: "), /*#__PURE__*/React.createElement("input", {
       id: "workoutDate",
-      "class": "input is-medium",
+      className: "input is-medium",
       type: "date",
       name: "workoutDate"
     })), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "duration"
     }, "Duration: "), /*#__PURE__*/React.createElement("input", {
       id: "workoutDuration",
-      "class": "input is-medium",
+      className: "input is-medium",
       type: "text",
       name: "duration",
       placeholder: "Workout Duration"
@@ -68,9 +70,9 @@ var WorkoutForm = function WorkoutForm(props) {
       name: "_csrf",
       value: props.csrf
     }), /*#__PURE__*/React.createElement("p", {
-      "class": "centerMe"
+      className: "centerMe"
     }, /*#__PURE__*/React.createElement("input", {
-      "class": "button tag has-background-link is-medium makeWorkoutSubmit",
+      className: "button tag has-background-link is-medium makeWorkoutSubmit",
       type: "submit",
       value: "Submit"
     })))
@@ -83,8 +85,8 @@ var WorkoutList = function WorkoutList(props) {
 
   if (props.workouts.length === 0) {
     return (/*#__PURE__*/React.createElement("div", {
-        "class": "workoutList container tile is-parent is-vertical box has-background-primary"
-      }, /*#__PURE__*/React.createElement("h3", {
+        className: "workoutList container tile is-parent is-vertical box has-background-primary"
+      }, /*#__PURE__*/React.createElement("p", {
         className: "emptyWorkout"
       }, "No Workouts Uploaded"))
     );
@@ -93,7 +95,7 @@ var WorkoutList = function WorkoutList(props) {
   var workoutNodes = props.workouts.map(function (workout) {
     return (/*#__PURE__*/React.createElement("div", {
         key: workout._id,
-        "class": "workout container tile is-parent is-vertical box has-background-primary"
+        className: "workout container tile is-parent is-vertical box has-background-primary"
       }, /*#__PURE__*/React.createElement("p", {
         className: "workoutType"
       }, " Type: ", workout.type, " "), /*#__PURE__*/React.createElement("p", {
@@ -105,9 +107,9 @@ var WorkoutList = function WorkoutList(props) {
       }, " Duration: ", workout.duration, " "), /*#__PURE__*/React.createElement("form", {
         name: "deleteForm",
         onSubmit: deleteWorkout,
-        action: "/maker",
+        action: "/workout",
         method: "DELETE",
-        "class": "deleteForm"
+        className: "deleteForm"
       }, /*#__PURE__*/React.createElement("input", {
         type: "hidden",
         name: "_csrf",
@@ -117,9 +119,9 @@ var WorkoutList = function WorkoutList(props) {
         name: "_id",
         value: workout._id
       }), /*#__PURE__*/React.createElement("p", {
-        "class": "centerMe"
+        className: "centerMe"
       }, /*#__PURE__*/React.createElement("input", {
-        "class": "deleteWorkoutSubmit button tag has-background-danger is-medium",
+        className: "deleteWorkoutSubmit button tag has-background-danger is-medium",
         type: "submit",
         value: "Delete"
       }))))
@@ -160,17 +162,11 @@ $(document).ready(function () {
 });
 "use strict";
 
-var handleError = function handleError(message) {
-  $('#errorMessage').text(message);
-  $('#workoutMessage').animate({
-    width: 'toggle'
-  }, 350);
+var handleMessage = function handleMessage(message) {
+  $('#message').text(message);
 };
 
 var redirect = function redirect(response) {
-  $('#workoutMessage').animate({
-    width: 'hide'
-  }, 350);
   window.location = response.redirect;
 };
 
@@ -184,7 +180,7 @@ var sendAjax = function sendAjax(type, action, data, success) {
     success: success,
     error: function error(xhr, status, _error) {
       var messageObj = JSON.parse(xhr.responseText);
-      handleError(messageObj.error);
+      handleMessage(messageObj.error);
     }
   });
 };

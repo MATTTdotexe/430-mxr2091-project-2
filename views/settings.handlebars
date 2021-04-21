@@ -13,13 +13,13 @@
   <link rel="shortcut icon" href="/assets/img/favicon.png"/>
   <link rel="stylesheet" type="text/css" href="/assets/style.css"/>
 </head>
-<body>
+<body> 
   <div class="columns tile is-ancestor box has-background-primary">
     <nav class="column is-one-fifth tile is-parent box has-background-info">
 
       <a class="column tag tile is-parent box has-background-info" href="/login"><img id="logo" src="/assets/img/logo-icon.png"/></a>
 
-      <a class="column tag tile is-parent box has-background-warning" href="/settings">Settings</a>
+      <a id="loginButton" class="column tag tile is-parent box has-background-link" href="/workout">App</a>
 
       <a class="column tag tile is-parent box has-background-danger" href="/logout">Log out</a>
 
@@ -27,20 +27,26 @@
   </div>
 
   <div class="section columns tile is-ancestor box has-background-primary">
-    <div class="column is-three-fifths is-offset-one-fifth centerMeDiv tile is-parent is-vertical box has-background-info">
+    <div class="column is-three-fifths is-offset-one-fifth tile is-parent is-vertical box has-background-info">
 
-      <div id="message">
+      <div id="options" class="container tile is-parent is-vertical box has-background-primary">
+        <input id="subOptionButton" class="button tag has-background-link is-medium" type="button" value="Manage Subscription" />
+        <input id="passwordOptionButton" class="button tag has-background-danger is-medium" type="button" value="Change Password" />
       </div>
 
-      <div id="makeWorkout">
+      <div id="message"> 
       </div>
 
-      <div id="workouts">
+      <div id="status">
+      </div>
+
+      <div id="content">
       </div>
 
     </div>
   </div>
   
-  <script src="/assets/bundle.js"></script>
+
+  <script src="/assets/settings.js"></script>
 </body>
 </html>

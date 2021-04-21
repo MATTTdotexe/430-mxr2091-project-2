@@ -1,32 +1,34 @@
 "use strict";
 
 var handleLogin = function handleLogin(e) {
-  e.preventDefault(); // $('#workoutMessage').animate({ width: 'toggle' }, 350);
+  e.preventDefault();
 
   if ($('#user').val() == '' || $('#pass').val() == '') {
-    handleError('Username or password is empty.');
+    handleMessage('Username or password is empty.');
     return false;
-  }
+  } // console.log($('input[name=_csrf]').val());
 
-  console.log($('input[name=_csrf]').val());
+
   sendAjax('POST', $('#loginForm').attr('action'), $('#loginForm').serialize(), redirect);
+  handleMessage('');
   return false;
 };
 
 var handleSignup = function handleSignup(e) {
-  e.preventDefault(); // $('#workoutMessage').animate({ width: 'toggle' }, 350);
+  e.preventDefault();
 
   if ($('#user').val() == '' || $('#pass').val() == '' || $('#pass2').val() == '') {
-    handleError('All fields are required.');
+    handleMessage('All fields are required.');
     return false;
   }
 
   if ($('#pass').val() !== $('#pass2').val()) {
-    handleError('Passwords do not match.');
+    handleMessage('Passwords do not match.');
     return false;
   }
 
   sendAjax('POST', $('#signupForm').attr('action'), $('#signupForm').serialize(), redirect);
+  handleMessage('');
   return false;
 };
 
@@ -37,12 +39,12 @@ var LoginWindow = function LoginWindow(props) {
       onSubmit: handleLogin,
       action: "/login",
       method: "POST",
-      "class": "container tile is-child is-vertical box has-background-primary"
+      className: "container tile is-child is-vertical box has-background-primary"
     }, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "username"
     }, "Username: "), /*#__PURE__*/React.createElement("input", {
       id: "user",
-      "class": "input is-medium",
+      className: "input is-medium",
       type: "text",
       name: "username",
       placeholder: "username"
@@ -50,7 +52,7 @@ var LoginWindow = function LoginWindow(props) {
       htmlFor: "pass"
     }, "Password: "), /*#__PURE__*/React.createElement("input", {
       id: "pass",
-      "class": "input is-medium",
+      className: "input is-medium",
       type: "password",
       name: "pass",
       placeholder: "password"
@@ -59,9 +61,9 @@ var LoginWindow = function LoginWindow(props) {
       name: "_csrf",
       value: props.csrf
     }), /*#__PURE__*/React.createElement("p", {
-      "class": "centerMe"
+      className: "centerMe"
     }, /*#__PURE__*/React.createElement("input", {
-      "class": "button tag has-background-link is-medium formSubmit",
+      className: "button tag has-background-link is-medium formSubmit",
       type: "submit",
       value: "Sign in"
     })))
@@ -75,12 +77,12 @@ var SignupWindow = function SignupWindow(props) {
       onSubmit: handleSignup,
       action: "/signup",
       method: "POST",
-      "class": "container tile is-child is-vertical box has-background-primary"
+      className: "container tile is-child is-vertical box has-background-primary"
     }, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("label", {
       htmlFor: "username"
     }, "Username: "), /*#__PURE__*/React.createElement("input", {
       id: "user",
-      "class": "input is-medium",
+      className: "input is-medium",
       type: "text",
       name: "username",
       placeholder: "username"
@@ -88,7 +90,7 @@ var SignupWindow = function SignupWindow(props) {
       htmlFor: "pass"
     }, "Password: "), /*#__PURE__*/React.createElement("input", {
       id: "pass",
-      "class": "input is-medium",
+      className: "input is-medium",
       type: "password",
       name: "pass",
       placeholder: "password"
@@ -96,7 +98,7 @@ var SignupWindow = function SignupWindow(props) {
       htmlFor: "pass2"
     }, "Password: "), /*#__PURE__*/React.createElement("input", {
       id: "pass2",
-      "class": "input is-medium",
+      className: "input is-medium",
       type: "password",
       name: "pass2",
       placeholder: "retype password"
@@ -105,9 +107,9 @@ var SignupWindow = function SignupWindow(props) {
       name: "_csrf",
       value: props.csrf
     }), /*#__PURE__*/React.createElement("p", {
-      "class": "centerMe"
+      className: "centerMe"
     }, /*#__PURE__*/React.createElement("input", {
-      "class": "button tag has-background-link is-medium formSubmit",
+      className: "button tag has-background-link is-medium formSubmit",
       type: "submit",
       value: "Sign up"
     })))
@@ -154,17 +156,11 @@ $(document).ready(function () {
 });
 "use strict";
 
-var handleError = function handleError(message) {
-  $('#errorMessage').text(message);
-  $('#workoutMessage').animate({
-    width: 'toggle'
-  }, 350);
+var handleMessage = function handleMessage(message) {
+  $('#message').text(message);
 };
 
 var redirect = function redirect(response) {
-  $('#workoutMessage').animate({
-    width: 'hide'
-  }, 350);
   window.location = response.redirect;
 };
 
@@ -178,7 +174,7 @@ var sendAjax = function sendAjax(type, action, data, success) {
     success: success,
     error: function error(xhr, status, _error) {
       var messageObj = JSON.parse(xhr.responseText);
-      handleError(messageObj.error);
+      handleMessage(messageObj.error);
     }
   });
 };

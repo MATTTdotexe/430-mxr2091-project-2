@@ -1,16 +1,16 @@
 const handleLogin = (e) => {
 	e.preventDefault();
 
-	// $('#workoutMessage').animate({ width: 'toggle' }, 350);
-
 	if ($('#user').val() == '' || $('#pass').val() == '') {
-		handleError('Username or password is empty.');
+		handleMessage('Username or password is empty.');
 		return false;
 	}
 
-	console.log($('input[name=_csrf]').val());
+	// console.log($('input[name=_csrf]').val());
 
 	sendAjax('POST', $('#loginForm').attr('action'), $('#loginForm').serialize(), redirect);
+
+	handleMessage('');
 
 	return false;
 };
@@ -18,37 +18,37 @@ const handleLogin = (e) => {
 const handleSignup = (e) => {
 	e.preventDefault();
 
-	// $('#workoutMessage').animate({ width: 'toggle' }, 350);
-
 	if ($('#user').val() == '' || $('#pass').val() == '' || $('#pass2').val() == '') {
-		handleError('All fields are required.');
+		handleMessage('All fields are required.');
 		return false;
 	}
 
 	if ($('#pass').val() !== $('#pass2').val()) {
-		handleError('Passwords do not match.');
+		handleMessage('Passwords do not match.');
 		return false;
 	}
 
 	sendAjax('POST', $('#signupForm').attr('action'), $('#signupForm').serialize(), redirect);
 
+	handleMessage('');
+	
 	return false;
 };
 
 const LoginWindow = (props) => {
 	return (
 		<form id="loginForm" name="loginForm" onSubmit={handleLogin}
-		action="/login" method="POST" class="container tile is-child is-vertical box has-background-primary">
+		action="/login" method="POST" className="container tile is-child is-vertical box has-background-primary">
 		
 			<p><label htmlFor="username">Username: </label>
-			<input id="user" class="input is-medium" type="text" name="username" placeholder="username"/></p>
+			<input id="user" className="input is-medium" type="text" name="username" placeholder="username"/></p>
 
 			<p><label htmlFor="pass">Password: </label>
-			<input id="pass" class="input is-medium" type="password" name="pass" placeholder="password"/></p>
+			<input id="pass" className="input is-medium" type="password" name="pass" placeholder="password"/></p>
 
 			<input type="hidden" name="_csrf" value={props.csrf}/>
 
-			<p class="centerMe"><input class="button tag has-background-link is-medium formSubmit" type="submit" value="Sign in"/></p>
+			<p className="centerMe"><input className="button tag has-background-link is-medium formSubmit" type="submit" value="Sign in"/></p>
 
 		</form>
 	);
@@ -57,20 +57,20 @@ const LoginWindow = (props) => {
 const SignupWindow = (props) => {
 	return (
 		<form id="signupForm" name="signupForm" onSubmit={handleSignup}
-		action="/signup" method="POST" class="container tile is-child is-vertical box has-background-primary">
+		action="/signup" method="POST" className="container tile is-child is-vertical box has-background-primary">
 		
 			<p><label htmlFor="username">Username: </label>
-			<input id="user" class="input is-medium" type="text" name="username" placeholder="username"/></p>
+			<input id="user" className="input is-medium" type="text" name="username" placeholder="username"/></p>
 
 			<p><label htmlFor="pass">Password: </label>
-			<input id="pass" class="input is-medium" type="password" name="pass" placeholder="password"/></p>
+			<input id="pass" className="input is-medium" type="password" name="pass" placeholder="password"/></p>
 
 			<p><label htmlFor="pass2">Password: </label>
-			<input id="pass2" class="input is-medium" type="password" name="pass2" placeholder="retype password"/></p>
+			<input id="pass2" className="input is-medium" type="password" name="pass2" placeholder="retype password"/></p>
 
 			<input type="hidden" name="_csrf" value={props.csrf}/>
 
-			<p class="centerMe"><input class="button tag has-background-link is-medium formSubmit" type="submit" value="Sign up"/></p>
+			<p className="centerMe"><input className="button tag has-background-link is-medium formSubmit" type="submit" value="Sign up"/></p>
 
 		</form>
 	);

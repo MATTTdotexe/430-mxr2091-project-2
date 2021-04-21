@@ -24,6 +24,12 @@ const AccountSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  subscription: {
+    type: String,
+    required: true,
+    trim: true,
+    default: 'standard',
+  },
   createdDate: {
     type: Date,
     default: Date.now,
@@ -33,6 +39,7 @@ const AccountSchema = new mongoose.Schema({
 AccountSchema.statics.toAPI = (doc) => ({
   // _id is built into your mongo document and is guaranteed to be unique
   username: doc.username,
+  subscription: doc.subscription,
   _id: doc._id,
 });
 
@@ -53,6 +60,67 @@ AccountSchema.statics.findByUsername = (name, callback) => {
   };
 
   return AccountModel.findOne(search, callback);
+};
+
+// returns the subscription field of a provided id
+AccountSchema.statics.subscriptionById = (Id, callback) => {
+  const search = {
+    _id: Id,
+  };
+  const proj = {
+    subscription: 1,
+  };
+
+  return AccountModel.findOne(search, proj, callback);
+};
+
+AccountSchema.statics.changeSubscriptionById = (Id) => {
+  const returnDocument = AccountModel.subscriptionById(Id, (err, doc) => {
+    if (err) {
+      console.log(err);
+      return false;
+    }
+
+    if (!doc) {
+      return false;
+    }
+
+    // flip the subscription field between standard and premium
+    const search = {
+      _id: Id,
+    };
+    if (doc.subscription === 'standard') {
+      const update = {
+        $set: { subscription: 'premium' },
+      };
+
+      AccountModel.updateOne(search, update, (err2, res) => {
+        const result = res;
+        if (err2) {
+          console.log(err2);
+          return false;
+        }
+        return result;
+      });
+    } else {
+      const update = {
+        $set: { subscription: 'standard' },
+      };
+
+      AccountModel.updateOne(search, update, (err2, res) => {
+        const result = res;
+        if (err2) {
+          console.log(err2);
+          return false;
+        }
+        return result;
+      });
+    }
+
+    return true;
+  });
+
+  return returnDocument;
 };
 
 AccountSchema.statics.generateHash = (password, callback) => {
@@ -79,6 +147,27 @@ AccountSchema.statics.authenticate = (username, password, callback) => {
       return callback();
     });
   });
+};
+
+AccountSchema.statics.changePassword = (Id, newpassword, newsalt) => {
+  const search = {
+    _id: Id,
+  };
+  const update = {
+    $set: { password: newpassword, salt: newsalt },
+  };
+
+  // update the database fields for password and hash
+  AccountModel.updateOne(search, update, (err, res) => {
+    const result = res;
+    if (err) {
+      console.log(err);
+      return false;
+    }
+    return result;
+  });
+
+  return true;
 };
 
 AccountModel = mongoose.model('Account', AccountSchema);

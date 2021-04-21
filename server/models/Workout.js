@@ -15,28 +15,28 @@ const WorkoutSchema = new mongoose.Schema({
     required: true,
     maxLength: 64,
     trim: true,
-    set: escapeChars
+    set: escapeChars,
   },
   descr: {
     type: String,
     required: false,
     maxLength: 128,
     trim: true,
-    set: escapeChars
+    set: escapeChars,
   },
   workoutDate: {
     type: String,
     required: true,
     maxLength: 64,
     trim: true,
-    set: escapeChars
+    set: escapeChars,
   },
   duration: {
     type: String,
     required: true,
     maxLength: 64,
     trim: true,
-    set: escapeChars
+    set: escapeChars,
   },
   owner: {
     type: mongoose.Schema.ObjectId,
@@ -46,14 +46,14 @@ const WorkoutSchema = new mongoose.Schema({
   createdDate: {
     type: Date,
     default: Date.now,
-  }
+  },
 });
 
 WorkoutSchema.statics.toAPI = (doc) => ({
   type: doc.type,
   descr: doc.descr,
   workoutDate: doc.workoutDate,
-  duration: doc.duration
+  duration: doc.duration,
 });
 
 WorkoutSchema.statics.findByOwner = (ownerId, callback) => {
@@ -66,7 +66,7 @@ WorkoutSchema.statics.findByOwner = (ownerId, callback) => {
 
 WorkoutSchema.statics.deleteByWorkoutID = (workoutID, callback) => {
   const myquery = {
-    _id: workoutID
+    _id: workoutID,
   };
 
   return WorkoutModel.deleteOne(myquery, callback);

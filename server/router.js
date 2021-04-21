@@ -8,9 +8,13 @@ const router = (app) => {
   app.post('/login', mid.requiresSecure, mid.requiresLogout, controllers.Account.login);
   app.post('/signup', mid.requiresSecure, mid.requiresLogout, controllers.Account.signup);
   app.get('/logout', mid.requiresLogin, controllers.Account.logout);
-  app.get('/maker', mid.requiresLogin, controllers.Workout.makerPage);
-  app.post('/maker', mid.requiresLogin, controllers.Workout.make);
-  app.delete('/maker', mid.requiresLogin, controllers.Workout.delete);
+  app.get('/workout', mid.requiresLogin, controllers.Workout.workoutPage);
+  app.post('/workout', mid.requiresLogin, controllers.Workout.workout);
+  app.delete('/workout', mid.requiresLogin, controllers.Workout.delete);
+  app.get('/settings', mid.requiresLogin, controllers.Account.settingsPage);
+  app.post('/changepw', mid.requiresSecure, mid.requiresLogin, controllers.Account.changepw);
+  app.get('/subscription', mid.requiresLogin, controllers.Account.getsub);
+  app.post('/subscription', mid.requiresSecure, mid.requiresLogin, controllers.Account.changesub);
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
 };
 
