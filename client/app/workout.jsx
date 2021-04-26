@@ -106,6 +106,7 @@ const setup = function(csrf) {
 	);
 
 	loadWorkoutsFromServer();
+	loadSubscriptionFromServer();
 };
 
 const getToken = () => {

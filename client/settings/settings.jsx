@@ -66,19 +66,6 @@ const ChangeSubscriptionWindow = (props) => {
 	);
 };
 
-const DisplaySubscriptionStatus = (props) => {
-	const typeofsub = props.sub === "standard";
-	if (typeofsub) {
-		return (
-			<p className="centerMe" style={{color:"red"}}>Standard Subscription</p>
-		);
-	} else {
-		return (
-			<p className="centerMe" style={{color:"red"}}>Premium Subscription</p>
-		);
-	}
-}
-
 const createChangePasswordWindow = (csrf) => {
 	ReactDOM.render(
 		<ChangePasswordWindow csrf={csrf} />,
@@ -91,14 +78,6 @@ const createChangeSubscriptionWindow = (csrf) => {
 		<ChangeSubscriptionWindow csrf={csrf} />,
 		document.querySelector('#content')
 	);
-};
-
-const loadSubscriptionFromServer = () => {
-	sendAjax('GET', '/subscription', null, (sub) => {
-		ReactDOM.render(
-			<DisplaySubscriptionStatus sub={sub.sub} />, document.querySelector('#status')
-		);
-	});
 };
 
 const setup = (csrf) => {

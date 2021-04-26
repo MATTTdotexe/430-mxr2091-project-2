@@ -31,7 +31,7 @@ const handleSignup = (e) => {
 	sendAjax('POST', $('#signupForm').attr('action'), $('#signupForm').serialize(), redirect);
 
 	handleMessage('');
-	
+
 	return false;
 };
 

@@ -178,3 +178,52 @@ var sendAjax = function sendAjax(type, action, data, success) {
     }
   });
 };
+
+var DisplaySubscriptionStatus = function DisplaySubscriptionStatus(props) {
+  var typeofsub = props.sub === "standard";
+
+  if (typeofsub) {
+    return (/*#__PURE__*/React.createElement("p", {
+        className: "centerMe",
+        style: {
+          color: "red"
+        }
+      }, "Standard Subscription")
+    );
+  } else {
+    return (/*#__PURE__*/React.createElement("p", {
+        className: "centerMe",
+        style: {
+          color: "red"
+        }
+      }, "Premium Subscription")
+    );
+  }
+};
+
+var loadSubscriptionFromServer = function loadSubscriptionFromServer() {
+  sendAjax('GET', '/subscription', null, function (sub) {
+    ReactDOM.render( /*#__PURE__*/React.createElement(DisplaySubscriptionStatus, {
+      sub: sub.sub
+    }), document.querySelector('#status'));
+    var subText = document.querySelector('#status').innerText;
+
+    if (subText === "Standard Subscription") {
+      handleAdvertisement();
+    }
+  });
+};
+
+var Ad = function Ad() {
+  var availableAds = ["Advertisement: Buy overpriced clothing!!!", "Advertisement: Buy car insurance!!!", "Advertisement: Buy VPN service!!!", "Advertisement: Buy fast food!!!", "Advertisement: Buy this car at 30% APR!!!"];
+  var randomAdIndex = Math.floor(Math.random() * availableAds.length);
+  var randomAd = availableAds[randomAdIndex];
+  return (/*#__PURE__*/React.createElement("div", {
+      className: "container tile is-child is-vertical box has-background-warning"
+    }, /*#__PURE__*/React.createElement("p", null, randomAd))
+  );
+};
+
+var handleAdvertisement = function handleAdvertisement(ad) {
+  ReactDOM.render( /*#__PURE__*/React.createElement(Ad, null), document.querySelector('#advertisement'));
+};
