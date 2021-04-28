@@ -10,6 +10,10 @@ const settingsPage = (req, res) => {
   res.render('settings', { csrfToken: req.csrfToken() });
 };
 
+const errorPage = (req, res) => {
+  res.render('error');
+};
+
 const logout = (req, res) => {
   req.session.destroy();
   res.redirect('/');
@@ -180,6 +184,7 @@ const getToken = (request, response) => {
 module.exports = {
   loginPage,
   settingsPage,
+  errorPage,
   login,
   logout,
   signup,

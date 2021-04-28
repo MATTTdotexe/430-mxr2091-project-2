@@ -16,6 +16,7 @@ const router = (app) => {
   app.get('/subscription', mid.requiresLogin, controllers.Account.getsub);
   app.post('/subscription', mid.requiresSecure, mid.requiresLogin, controllers.Account.changesub);
   app.get('/', mid.requiresSecure, mid.requiresLogout, controllers.Account.loginPage);
+  app.get('*', controllers.Account.errorPage);
 };
 
 module.exports = router;

@@ -61,9 +61,10 @@ var WorkoutForm = function WorkoutForm(props) {
     }, "Duration: "), /*#__PURE__*/React.createElement("input", {
       id: "workoutDuration",
       className: "input is-medium",
-      type: "text",
+      type: "number",
+      min: "0",
       name: "duration",
-      placeholder: "Workout Duration"
+      placeholder: "Workout Duration in Minutes"
     })), /*#__PURE__*/React.createElement("input", {
       id: "_csrf",
       type: "hidden",
@@ -97,14 +98,14 @@ var WorkoutList = function WorkoutList(props) {
         key: workout._id,
         className: "workout container tile is-parent is-vertical box has-background-primary"
       }, /*#__PURE__*/React.createElement("p", {
-        className: "workoutType"
-      }, " Type: ", workout.type, " "), /*#__PURE__*/React.createElement("p", {
-        className: "workoutDescr"
-      }, " Description: ", workout.descr, " "), /*#__PURE__*/React.createElement("p", {
-        className: "workoutDate"
-      }, " Date of Workout: ", workout.workoutDate, " "), /*#__PURE__*/React.createElement("p", {
+        className: "workoutDate title is-3"
+      }, " ", workout.workoutDate, " "), /*#__PURE__*/React.createElement("p", {
+        className: "workoutType subtitle is-3"
+      }, " ", workout.type, " "), /*#__PURE__*/React.createElement("p", {
         className: "workoutDuration"
-      }, " Duration: ", workout.duration, " "), /*#__PURE__*/React.createElement("form", {
+      }, " ", workout.duration, " Minute Workout "), /*#__PURE__*/React.createElement("p", {
+        className: "workoutDescr"
+      }, " Description: ", workout.descr, " "), /*#__PURE__*/React.createElement("form", {
         name: "deleteForm",
         onSubmit: deleteWorkout,
         action: "/workout",

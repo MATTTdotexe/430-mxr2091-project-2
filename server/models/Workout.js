@@ -32,11 +32,9 @@ const WorkoutSchema = new mongoose.Schema({
     set: escapeChars,
   },
   duration: {
-    type: String,
+    type: Number,
     required: true,
-    maxLength: 64,
-    trim: true,
-    set: escapeChars,
+    min: 0
   },
   owner: {
     type: mongoose.Schema.ObjectId,

@@ -47,7 +47,7 @@ const ChangePasswordWindow = (props) => {
 
 			<input type="hidden" name="_csrf" value={props.csrf}/>
 
-			<p className="centerMe"><input className="button tag has-background-warning is-medium formSubmit" type="submit" value="Confirm"/></p>
+			<p className="centerMe"><input className="button tag has-background-danger is-medium formSubmit" type="submit" value="Confirm"/></p>
 
 		</form>
 	);
@@ -60,7 +60,7 @@ const ChangeSubscriptionWindow = (props) => {
 
 			<input type="hidden" name="_csrf" value={props.csrf}/>
 
-			<p className="centerMe"><input className="button tag has-background-info is-medium formSubmit" type="submit" value="Change Subscription"/></p>
+			<p className="centerMe"><input className="button tag has-background-danger is-medium formSubmit" type="submit" value="Change Subscription"/></p>
 
 		</form>
 	);

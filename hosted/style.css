@@ -10,6 +10,11 @@ input[type=submit] {
     padding: .5em;
 }
 
+input[type=button] {
+    margin: .5em;
+    padding: .5em;
+}
+
 #workoutForm {
     margin-bottom: 1em;
 }

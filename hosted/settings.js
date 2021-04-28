@@ -72,7 +72,7 @@ var ChangePasswordWindow = function ChangePasswordWindow(props) {
     }), /*#__PURE__*/React.createElement("p", {
       className: "centerMe"
     }, /*#__PURE__*/React.createElement("input", {
-      className: "button tag has-background-warning is-medium formSubmit",
+      className: "button tag has-background-danger is-medium formSubmit",
       type: "submit",
       value: "Confirm"
     })))
@@ -94,7 +94,7 @@ var ChangeSubscriptionWindow = function ChangeSubscriptionWindow(props) {
     }), /*#__PURE__*/React.createElement("p", {
       className: "centerMe"
     }, /*#__PURE__*/React.createElement("input", {
-      className: "button tag has-background-info is-medium formSubmit",
+      className: "button tag has-background-danger is-medium formSubmit",
       type: "submit",
       value: "Change Subscription"
     })))

@@ -42,7 +42,7 @@ const WorkoutForm = (props) => {
 			<input id="workoutDate" className="input is-medium" type="date" name="workoutDate"/></p>
 
 			<p><label htmlFor="duration">Duration: </label>
-			<input id="workoutDuration" className="input is-medium" type="text" name="duration" placeholder="Workout Duration"/></p>
+			<input id="workoutDuration" className="input is-medium" type="number" min="0" name="duration" placeholder="Workout Duration in Minutes"/></p>
 
 			<input id="_csrf" type="hidden" name="_csrf" value={props.csrf}/>
 
@@ -67,10 +67,10 @@ const WorkoutList = function(props) {
 	const workoutNodes = props.workouts.map(function(workout) {
 		return (
 			<div key={workout._id} className="workout container tile is-parent is-vertical box has-background-primary">
-				<p className="workoutType"> Type: {workout.type} </p>
+				<p className="workoutDate title is-3"> {workout.workoutDate} </p>
+				<p className="workoutType subtitle is-3"> {workout.type} </p>
+				<p className="workoutDuration"> {workout.duration} Minute Workout </p>
 				<p className="workoutDescr"> Description: {workout.descr} </p>
-				<p className="workoutDate"> Date of Workout: {workout.workoutDate} </p>
-				<p className="workoutDuration"> Duration: {workout.duration} </p>
 
 				<form name="deleteForm" onSubmit={deleteWorkout} action="/workout" method="DELETE" className="deleteForm">
 					<input type="hidden" name="_csrf" value={csrf}/>
