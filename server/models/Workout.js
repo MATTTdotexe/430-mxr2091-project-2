@@ -34,7 +34,7 @@ const WorkoutSchema = new mongoose.Schema({
   duration: {
     type: Number,
     required: true,
-    min: 0
+    min: 0,
   },
   owner: {
     type: mongoose.Schema.ObjectId,

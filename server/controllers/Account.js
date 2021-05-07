@@ -114,29 +114,30 @@ const changepw = (request, response) => {
   }
 
   // authenticate old password
-  Account.AccountModel.authenticate(req.body.username, req.body.oldpass, (err, account) => {
+  return Account.AccountModel.authenticate(req.body.username, req.body.oldpass, (err, account) => {
     if (err || !account) {
-      return res.status(401).json({ error: 'Wrong username or password.' });
+      // console.log('Wrong username or password.');
+      return res.status(400).json({ error: 'Wrong password.' });
     }
 
-    return res.json({ message: 'Authentication successful.' });
-  });
+    // console.log('authentication successful');
 
-  // encrypt the new password
-  Account.AccountModel.generateHash(req.body.newpass, (salt, hash) => {
-    const newAccountData = {
-      salt,
-      password: hash,
-    };
+    // encrypt the new password
+    Account.AccountModel.generateHash(req.body.newpass, (salt, hash) => {
+      const newAccountData = {
+        salt,
+        password: hash,
+      };
 
-    const { _id } = req.session.account;
-    Account.AccountModel.changePassword(_id, newAccountData.password, newAccountData.salt);
+      const { _id } = req.session.account;
+      Account.AccountModel.changePassword(_id, newAccountData.password, newAccountData.salt);
 
-    // log the user out so that they must now log in with their new password
+      // console.log('password changed');
+    });
+
+    // console.log('redirecting');
     return res.json({ redirect: '/logout' });
   });
-
-  return res.json({ message: 'Password change successful.' });
 };
 
 const getsub = (request, response) => {
